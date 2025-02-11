@@ -32,7 +32,10 @@ def read_root():
     return {"message": "PTT Stock Crawler Service is running."}
 
 
-@app.get("/articles")
+@app.get(
+    "/articles",
+    summary = "Read all articles of PTT Stock board",
+)
 def read_articles(
     db = Depends(get_db),
     page: int = 1,
@@ -47,12 +50,18 @@ def read_articles(
     return articles
 
 
-@app.get("/hot_articles")
+@app.get(
+    "/hot_articles",
+    summary = "Read hot articles of PTT Stock board",
+)
 def read_hot_articles(
     db = Depends(get_db),
     page: int = 1,
     limit: int = 10
 ):
+    """
+    - Hot articles are those with "爆" push count.
+    """
     hot_articles = (
         db.query(article)
         .filter(article.push_count == 100)
