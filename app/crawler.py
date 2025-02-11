@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs4
 
-from app.logging import logger
+from app.log_config import logger
 from app.models import article
 
 PTT_STOCK_URL = 'https://www.ptt.cc/bbs/Stock/index.html'
